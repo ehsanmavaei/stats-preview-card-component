@@ -1,0 +1,100 @@
+@use "../util" as *;
+@use "../globals" as *;
+
+body {
+  font-family: "Red Hat Display", sans-serif;
+
+  background-image: url("../app/assets/images/pattern-background-desktop.svg");
+  background-color: $pale-blue;
+  background-repeat: no-repeat;
+
+  background-position: right left;
+  background-size: 100%;
+
+  @include breakpoint-down("small") {
+    background-image: url("../app/assets/images/pattern-background-mobile.svg");
+  }
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  line-height: 1.5;
+  text-align: center;
+  @include border-radius;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  background-color: #fff;
+  max-width: rem(375);
+  //   padding: rem(20);
+  .hero img {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .card-body {
+    padding: rem(23);
+    h1 {
+      font-size: rem(30);
+      font-weight:900;
+      color: $dark-blue;
+      padding-bottom: rem(10);
+    }
+    p {
+      color: $desaturated-blue;
+    }
+    .summary {
+      margin: rem(10);
+      // border: 1px solid black;
+      padding-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      p:first-of-type{
+        font-weight: 900;
+        color:$dark-blue;
+        // border-bottom: 1px solid red;  
+      }
+
+      a {
+        flex: 1;
+        text-align: right;
+        
+      
+        color: $purple;
+        font-weight: 700;
+       
+      }
+     
+    }
+    button {
+      color:$pale-blue;
+      font-size: 1rem;
+      font-weight: 700;
+      background-color: $purple;
+      width: 90%;
+      margin: 0 auto;
+      padding: rem(15);
+      margin-top: 14px;
+      @include border-radius(11px);
+      border-style: none;
+      transition: 0.5 ease;
+      
+    }
+    button:hover{
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    }
+    button + p{
+    
+       padding-top: rem(30);
+       font-weight: 900;
+       a{
+        color: $dark-blue
+       }
+    }
+  }
+}
