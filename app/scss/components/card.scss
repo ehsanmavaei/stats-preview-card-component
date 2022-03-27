@@ -2,99 +2,106 @@
 @use "../globals" as *;
 
 body {
-  font-family: "Red Hat Display", sans-serif;
+  background-color: $main-background;
 
-  background-image: url("../app/assets/images/pattern-background-desktop.svg");
-  background-color: $pale-blue;
-  background-repeat: no-repeat;
-
-  background-position: right left;
-  background-size: 100%;
-
-  @include breakpoint-down("small") {
-    background-image: url("../app/assets/images/pattern-background-mobile.svg");
+  img {
+    width: 100%;
+    height: 100%;
   }
 }
-
 .container {
+  line-height: 1.5;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .card {
-  line-height: 1.5;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "body hero";
+  background-color: $card-background;
   @include border-radius;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  background-color: #fff;
-  max-width: rem(375);
-  //   padding: rem(20);
-  .hero img {
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+  .hero {
+    grid-area: hero;
+    position: relative;
+    img {
+      @include border-radius(0px, 10px, 10px, 0);
+    }
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $accent;
+      opacity: 0.5;
+      content: "";
+      width: 100%;
+      height: 100%;
+      @include border-radius(0, 10px, 10px, 0);
+    }
   }
-  .card-body {
-    padding: rem(23);
-    h1 {
-      font-size: rem(30);
-      font-weight:900;
-      color: $dark-blue;
-      padding-bottom: rem(10);
-    }
-    p {
-      color: $desaturated-blue;
-    }
-    .summary {
-      margin: rem(10);
-      // border: 1px solid black;
-      padding-top: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      p:first-of-type{
-        font-weight: 900;
-        color:$dark-blue;
-        // border-bottom: 1px solid red;  
-      }
+  .body {
+    font-family: "Inter", sans-serif;
+    margin: rem(30);
+    padding: rem(30);
 
-      a {
-        flex: 1;
-        text-align: right;
-        
-      
-        color: $purple;
-        font-weight: 700;
-       
-      }
-     
-    }
-    button {
-      color:$pale-blue;
-      font-size: 1rem;
+    // padding: 10px;
+    // text-align: center;
+    grid-area: body;
+    h1 {
+      color: $main-heading;
+      font-size: rem(35);
       font-weight: 700;
-      background-color: $purple;
-      width: 90%;
-      margin: 0 auto;
-      padding: rem(15);
-      margin-top: 14px;
-      @include border-radius(11px);
-      border-style: none;
-      transition: 0.5 ease;
-      
     }
-    button:hover{
-      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    span {
+      color: $accent;
+      font-weight: 700;
     }
-    button + p{
+    .caption {
+      color: $main-paragraph;
+      padding-top: rem(20);
+    }
+    .stat {
+      font-family: "Lexend Deca", sans-serif;
+
+      padding-top: rem(60);
+      display: flex;
+      color: $stat-headings;
+      justify-content: space-between;
+      h2 {
+        color: $main-heading;
+        font-size: rem(30);
+      }
     
-       padding-top: rem(30);
-       font-weight: 900;
-       a{
-        color: $dark-blue
-       }
+    }
+  }
+
+  @include breakpoint-down("medium") {
+    min-width: 375px;
+
+    max-width: 175px;
+
+    grid-template-areas:
+      "hero hero "
+      "body body ";
+    .hero img {
+      @include border-radius(10px, 10px, 0, 0);
+    }
+    .hero::after {
+      @include border-radius(10px, 10px, 0, 0);
+    }
+    .body {
+      text-align: center;
+      margin: rem(15);
+      h1 {
+        font-size: rem(30);
+      }
+      .stat {
+        padding-top: rem(40);
+        flex-direction: column;
+        gap: rem(20);
+      }
     }
   }
 }
